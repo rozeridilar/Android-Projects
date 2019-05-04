@@ -1,5 +1,6 @@
 package recyclerview.rozeridilar.com.recyclerview;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -7,10 +8,23 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
+
+    private ArrayList<String> mImageNames = new ArrayList<>();
+    private ArrayList<String> mImages = new ArrayList<>();
+    private Context mContext;
+
+    public RecyclerViewAdapter(Context mContext,ArrayList<String> mImageNames, ArrayList<String> mImages) {
+        this.mImageNames = mImageNames;
+        this.mImages = mImages;
+        this.mContext = mContext;
+    }
+
 
     @NonNull
     @Override
