@@ -7,9 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyCustomDialog.OnInputListener {
 
     private static final String TAG = "MainActivity";
+
+    @Override
+    public void sendInput(String input) {
+        Log.d(TAG, "sendInput: got the input" + input);
+
+        mInputDisplay.setText(input);
+    }
 
     //vars
     public String mInput;
@@ -38,4 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

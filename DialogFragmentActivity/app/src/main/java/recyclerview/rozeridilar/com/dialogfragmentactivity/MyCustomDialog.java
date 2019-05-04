@@ -51,7 +51,7 @@ public class MyCustomDialog extends DialogFragment {
 
                 String input = mInput.getText().toString();
                 if(!input.equals("")){
-
+                    mOnInputListener.sendInput(input);
                 }
 
                 getDialog().dismiss();
