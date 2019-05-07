@@ -11,10 +11,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
     }
 
     private void init(){
-
+        SelectorFragment selectorFragment = new SelectorFragment();
+        doFragmentTransaction(selectorFragment,getString(R.string.fragment_selector),false,"");
     }
 
     private void doFragmentTransaction(Fragment fragment,String tag,boolean addToBackStack, String message){
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.addToBackStack(tag);
         }
         fragmentTransaction.commit();
-
 
     }
 }
