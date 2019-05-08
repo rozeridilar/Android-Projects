@@ -15,6 +15,26 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
     private TextView toolbarTitle;
 
     @Override
+    public void inflateFragment(String fragmentTag, String message) {
+
+        if (fragmentTag.equals(getString(R.string.fragment_a))) {
+            FragmentA fragmentA = new FragmentA();
+            doFragmentTransaction(fragmentA,getString(R.string.fragment_a),true,message);
+
+        } else if (fragmentTag.equals(getString(R.string.fragment_b))) {
+
+        } else if (fragmentTag.equals(getString(R.string.fragment_c))) {
+
+        }
+    }
+
+    @Override
+    public void setToolBarTitle(String fragmentTag) {
+        toolbarTitle.setText(fragmentTag);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -32,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, fragment,tag);
+
+        if(!message.equals("")){
+            Bundle bundle = new Bundle();
+            bundle.putString(getString(R.string.intent_message),message);
+            fragment.setArguments(bundle);
+        }
+
         if (addToBackStack){
             fragmentTransaction.addToBackStack(tag);
         }
@@ -39,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
 
     }
 
-    @Override
-    public void setToolBarTitle(String fragmentTag) {
-        toolbarTitle.setText(fragmentTag);
-    }
+
+
 }
