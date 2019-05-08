@@ -10,6 +10,7 @@ import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
         Observable<Task> taskObservable = Observable
                 .fromIterable(DataSource.createTaskList())
                 .subscribeOn(Schedulers.io())
+                .filter(new Predicate<Task>() {
+                    @Override
+                    public boolean test(Task task) throws Exception {
+                        //HERE IS THE BACKGROUND THREAD
+                        Log.d(TAG, "test: " + Thread.currentThread().getName());
+                        return task.isComplete();
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread());
 
         taskObservable.subscribe(new Observer<Task>() {
